@@ -1,17 +1,17 @@
 <script>
 import { defineComponent } from 'vue';
-import VueJsList from '@/vue-js-list.vue';
+import VList from '@/vue-js-list.vue';
 
 export default defineComponent({
   name: 'ServeDev',
   components: {
-    VueJsList
+    VList
   }
 });
 </script>
 
 <template>
   <div id="app">
-    <vue-js-list />
+    <v-list />
   </div>
 </template>

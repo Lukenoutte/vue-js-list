@@ -30,7 +30,7 @@ export default {
   data(){
     arrayOfContent: [ ["content1", "content2"], ["content3", "content4"], ],
     arrayOfTitles: ["title1", "title2"]
-  }
+  },
   components: {
     VList,
   }

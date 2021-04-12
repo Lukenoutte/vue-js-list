@@ -1,7 +1,7 @@
 {
   "name": "vue-js-list",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.0.3",
+  "description": "Simple and beautiful list in vue.js 3",
   "main": "dist/vue-js-list.ssr.js",
   "browser": "dist/vue-js-list.esm.js",
   "module": "dist/vue-js-list.esm.js",
@@ -44,5 +44,19 @@
   },
   "engines": {
     "node": ">=12"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lukenoutte/vue-js-list"
+  },
+  "keywords": [
+    "web",
+    "front-end",
+    "vue",
+    "vuejs",
+    "list",
+    "v-list",
+    "vue-list",
+    "custom"
+  ]
 }

@@ -59,7 +59,7 @@
 import { ref } from "vue";
 
 export default {
-  name: "VueJsList",
+  name: "VList",
   props: {
     content: {
       type: Array,
@@ -124,7 +124,7 @@ export default {
 
 .dark-mode {
   --background: #151618;
-  --color-1: #202224;
+  --color-1: #222426;
   --color-2: #bfc0c1;
   --color-3: #191a1c;
   --color-4: #27282c;
