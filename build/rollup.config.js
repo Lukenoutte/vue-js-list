@@ -7,7 +7,6 @@ import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import babel from '@rollup/plugin-babel';
-import PostCSS from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
 import minimist from 'minimist';
 
@@ -16,6 +15,10 @@ const esbrowserslist = fs.readFileSync('./.browserslistrc')
   .toString()
   .split('\n')
   .filter((entry) => entry && entry.substring(0, 2) !== 'ie');
+
+// Extract babel preset-env config, to combine with esbrowserslist
+const babelPresetEnvConfig = require('../babel.config')
+  .presets.filter((entry) => entry[0] === '@babel/preset-env')[0][1];
 
 const argv = minimist(process.argv.slice(2));
 
@@ -38,21 +41,16 @@ const baseConfig = {
       'process.env.NODE_ENV': JSON.stringify('production'),
     },
     vue: {
-      preprocessStyles: true,
+      css: true,
+      template: {
+        isProduction: true,
+      },
     },
     postVue: [
       resolve({
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue'],
       }),
-      // Process only `<style module>` blocks.
-      PostCSS({
-        modules: {
-          generateScopedName: '[local]___[hash:base64:5]',
-        },
-        include: /&module=.*\.css$/,
-      }),
-      // Process all `<style>` blocks except `<style module>`.
-      PostCSS({ include: /(?<!&module=.*)\.css$/ }),
+      commonjs(),
     ],
     babel: {
       exclude: 'node_modules/**',
@@ -101,12 +99,12 @@ if (!argv.format || argv.format === 'es') {
           [
             '@babel/preset-env',
             {
+              ...babelPresetEnvConfig,
               targets: esbrowserslist,
             },
           ],
         ],
       }),
-      commonjs(),
     ],
   };
   buildFormats.push(esConfig);
@@ -127,10 +125,15 @@ if (!argv.format || argv.format === 'cjs') {
     plugins: [
       replace(baseConfig.plugins.replace),
       ...baseConfig.plugins.preVue,
-      vue(baseConfig.plugins.vue),
+      vue({
+        ...baseConfig.plugins.vue,
+        template: {
+          ...baseConfig.plugins.vue.template,
+          optimizeSSR: true,
+        },
+      }),
       ...baseConfig.plugins.postVue,
       babel(baseConfig.plugins.babel),
-      commonjs(),
     ],
   };
   buildFormats.push(umdConfig);
@@ -154,7 +157,6 @@ if (!argv.format || argv.format === 'iife') {
       vue(baseConfig.plugins.vue),
       ...baseConfig.plugins.postVue,
       babel(baseConfig.plugins.babel),
-      commonjs(),
       terser({
         output: {
           ecma: 5,

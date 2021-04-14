@@ -10,8 +10,8 @@ export default /*#__PURE__*/(() => {
   const installable = component;
 
   // Attach install function executed by Vue.use()
-  installable.install = (app) => {
-    app.component('VueJsList', installable);
+  installable.install = (Vue) => {
+    Vue.component('VueJsList', installable);
   };
   return installable;
 })();

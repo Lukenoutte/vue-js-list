@@ -1,16 +1,19 @@
 {
   "name": "vue-js-list",
-  "version": "0.0.3",
-  "description": "Simple and beautiful list in vue.js 3",
+  "version": "0.0.8",
+  "description": "Simple and customizable Vue.js list.",
+
   "main": "dist/vue-js-list.ssr.js",
   "browser": "dist/vue-js-list.esm.js",
   "module": "dist/vue-js-list.esm.js",
   "unpkg": "dist/vue-js-list.min.js",
+
   "files": [
     "dist/*",
     "src/**/*.vue"
   ],
   "sideEffects": false,
+
   "scripts": {
     "serve": "vue-cli-service serve dev/serve.js",
     "build": "cross-env NODE_ENV=production rollup --config build/rollup.config.js",
@@ -18,7 +21,10 @@
     "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
     "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife"
   },
-  "dependencies": {},
+
+  "dependencies": {
+  },
+
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
@@ -29,18 +35,16 @@
     "@rollup/plugin-replace": "^2.3.4",
     "@vue/cli-plugin-babel": "^4.5.10",
     "@vue/cli-service": "^4.5.10",
-    "@vue/compiler-sfc": "^3.0.5",
     "cross-env": "^7.0.3",
     "minimist": "^1.2.5",
-    "postcss": "^8.2.3",
     "rollup": "^2.36.1",
-    "rollup-plugin-postcss": "^4.0.0",
     "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-vue": "^6.0.0",
-    "vue": "^3.0.5"
+    "rollup-plugin-vue": "^5.1.9",
+    "vue": "^2.6.12",
+    "vue-template-compiler": "^2.6.12"
   },
   "peerDependencies": {
-    "vue": "^3.0.5"
+    "vue": "^2.6.12"
   },
   "engines": {
     "node": ">=12"

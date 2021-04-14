@@ -1,8 +1,8 @@
 <script>
-import { defineComponent } from 'vue';
+import Vue from 'vue';
 import VList from '@/vue-js-list.vue';
 
-export default defineComponent({
+export default Vue.extend({
   name: 'ServeDev',
   components: {
     VList

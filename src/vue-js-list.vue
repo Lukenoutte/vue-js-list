@@ -56,10 +56,36 @@
 </template>
 
 <script>
-import { ref } from "vue";
-
 export default {
   name: "VList",
+  data() {
+    return {
+      searchText: "",
+      receiveContentList : this.content
+    };
+  },
+  methods: {
+    searchFunc: function () {
+      let filtredArray = [];
+      if (this.isEmptyOrSpaces(this.searchText))
+        return (this.receiveContentList = this.content);
+      props.content.map((row) => {
+        row.map((item) => {
+          let itemLowCase = item.toLowerCase();
+          let searchLowCase = this.searchText.toLowerCase();
+          if (itemLowCase.includes(searchLowCase)) {
+            let itemNotExist = filtredArray.indexOf(row) === -1;
+            itemNotExist ? filtredArray.push(row) : null;
+          }
+        });
+      });
+
+      this.receiveContentList = filtredArray;
+    },
+    isEmptyOrSpaces: function (str) {
+      return str === null || str.match(/^ *$/) !== null;
+    },
+  },
   props: {
     content: {
       type: Array,
@@ -74,37 +100,6 @@ export default {
     inputPlaceholder: { type: String, default: "Search..." },
     columnsWidth: { type: [String, Number], default: 100 },
     darkModeOn: { type: Boolean, default: false },
-  },
-  setup(props) {
-    let searchText = ref("");
-    let receiveContentList = ref(props.content);
-    function searchFunc() {
-      let filtredArray = [];
-      if (isEmptyOrSpaces(searchText.value))
-        return (receiveContentList.value = props.content);
-      props.content.map((row) => {
-        row.map((item) => {
-          let itemLowCase = item.toLowerCase();
-          let searchLowCase = searchText.value.toLowerCase();
-          if (itemLowCase.includes(searchLowCase)) {
-            let itemNotExist = filtredArray.indexOf(row) === -1;
-            itemNotExist ? filtredArray.push(row) : null;
-          }
-        });
-      });
-
-      receiveContentList.value = filtredArray;
-    }
-
-    function isEmptyOrSpaces(str) {
-      return str === null || str.match(/^ *$/) !== null;
-    }
-
-    return {
-      searchText,
-      searchFunc,
-      receiveContentList,
-    };
   },
 };
 </script>
