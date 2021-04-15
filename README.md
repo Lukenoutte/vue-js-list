@@ -1,4 +1,5 @@
 [![npm version](https://badge.fury.io/js/vue-js-list.svg)](https://badge.fury.io/js/vue-js-list)
+[![npm](https://img.shields.io/npm/dm/vue-js-list.svg)](https://www.npmjs.com/package/vue-js-list)
 
 ### Vue.js List
 
