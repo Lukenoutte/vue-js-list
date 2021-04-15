@@ -1,17 +1,17 @@
 <script>
-import Vue from 'vue';
-import VList from '@/vue-js-list.vue';
+import Vue from "vue";
+import VList from "@/vue-js-list.vue";
 
 export default Vue.extend({
-  name: 'ServeDev',
+  name: "ServeDev",
   components: {
-    VList
-  }
+    VList,
+  },
 });
 </script>
 
 <template>
   <div id="app">
-    <v-list />
+    <v-list/>
   </div>
 </template>

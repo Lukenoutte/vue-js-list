@@ -61,7 +61,7 @@ export default {
   data() {
     return {
       searchText: "",
-      receiveContentList : this.content
+      receiveContentList: this.content,
     };
   },
   methods: {
@@ -69,7 +69,7 @@ export default {
       let filtredArray = [];
       if (this.isEmptyOrSpaces(this.searchText))
         return (this.receiveContentList = this.content);
-      props.content.map((row) => {
+      this.content.map((row) => {
         row.map((item) => {
           let itemLowCase = item.toLowerCase();
           let searchLowCase = this.searchText.toLowerCase();
@@ -89,13 +89,19 @@ export default {
   props: {
     content: {
       type: Array,
-      required: true,
-      default: [
-        ["content1", "content2"],
-        ["content3", "content4"],
-      ],
+      default: () => {
+        return [
+          ["content1", "content2"],
+          ["content3", "content4"],
+        ];
+      },
     },
-    titles: { type: Array, required: true, default: ["title1", "title2"] },
+    titles: {
+      type: Array,
+      default: () => {
+        return ["title1", "title2"];
+      },
+    },
     tableHeight: { type: [String, Number] },
     inputPlaceholder: { type: String, default: "Search..." },
     columnsWidth: { type: [String, Number], default: 100 },

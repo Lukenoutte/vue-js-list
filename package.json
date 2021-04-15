@@ -1,6 +1,6 @@
 {
   "name": "vue-js-list",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "description": "Simple and customizable Vue.js list.",
 
   "main": "dist/vue-js-list.ssr.js",
