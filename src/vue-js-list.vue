@@ -66,17 +66,15 @@ export default {
   },
   methods: {
     searchFunc: function () {
-      let filtredArray = [];
-      if (this.isEmptyOrSpaces(this.searchText))
-        return (this.receiveContentList = this.content);
+      const filtredArray = [];
+      if (this.isEmptyOrSpaces(this.searchText)) return (this.receiveContentList = this.content);
       this.content.map((row) => {
         row.map((item) => {
-          let itemLowCase = item.toLowerCase();
-          let searchLowCase = this.searchText.toLowerCase();
-          if (itemLowCase.includes(searchLowCase)) {
-            let itemNotExist = filtredArray.indexOf(row) === -1;
-            itemNotExist ? filtredArray.push(row) : null;
-          }
+          const itemLowCase = item.toLowerCase();
+          const searchLowCase = this.searchText.toLowerCase();
+          if (!itemLowCase.includes(searchLowCase)) return
+          const itemNotExist = filtredArray.indexOf(row) === -1;
+          if (itemNotExist) filtredArray.push(row)
         });
       });
 
